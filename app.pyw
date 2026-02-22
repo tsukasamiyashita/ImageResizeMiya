@@ -6,12 +6,15 @@ from tkinterdnd2 import DND_FILES, TkinterDnD
 
 class ImageQualityApp:
     # バージョン定数
-    VERSION = "v1.2.2"
+    VERSION = "v1.2.3"
     
     # 変更履歴
     CHANGELOG = f"""
     【変更履歴】
     {VERSION}
+     - ヘルプメニューに「使い方 (Readme)」を追加
+
+    v1.2.2
      - 完了通知ウィンドウのOKボタンを削除（自動クローズのみに変更）
 
     v1.2.1
@@ -36,6 +39,33 @@ class ImageQualityApp:
     v1.0.0
      - 画像品質変更ツールとして新規リリース
     """
+
+    # Readme情報
+    README_TEXT = """【ImageResizeMiya 使い方】
+
+■ 概要
+画像の品質（圧縮率）を一括で変更するためのツールです。
+JPEGやWebPなどのファイルサイズを削減したい場合に便利です。
+
+■ 基本的な使い方
+1. 画像の選択
+   「参照」ボタン、またはウィンドウ内へのドラッグ＆ドロップで画像を選択します。複数選択も可能です。
+
+2. 品質の選択
+   リストから希望の画質を選びます（初期設定は「低画質(50)」）。
+
+3. 保存先の選択
+   - 「同じフォルダ」: 元画像と同じ場所に「_q50」等の名前で保存されます。
+   - 「任意のフォルダ」: 指定したフォルダにまとめて保存されます。
+
+4. 実行
+   「品質変更を実行」ボタンを押すと処理が始まります。
+   完了メッセージは3秒後に自動で閉じます。
+
+■ 注意事項
+- PNG形式も処理可能ですが、品質設定による圧縮効果はJPEG/WebPほど高くありません。
+- 透明度(アルファチャンネル)を含む画像をJPEGで保存する場合、自動的に背景が黒(または白)に変換されます。
+- スマホ等で撮影した写真の向き（EXIF回転情報）は自動的に補正して保存されます。"""
 
     def __init__(self, root):
         self.root = root
@@ -88,9 +118,16 @@ class ImageQualityApp:
         menubar = Menu(self.root)
         # ヘルプメニュー
         help_menu = Menu(menubar, tearoff=0)
+        # Readmeをメニューに追加
+        help_menu.add_command(label="使い方 (Readme)", command=self.show_readme)
+        help_menu.add_separator() # 区切り線
         help_menu.add_command(label="バージョン情報", command=self.show_version_info)
+        
         menubar.add_cascade(label="ヘルプ", menu=help_menu)
         self.root.config(menu=menubar)
+
+    def show_readme(self):
+        messagebox.showinfo("使い方 (Readme)", self.README_TEXT)
 
     def show_version_info(self):
         info_text = f"ImageResizeMiya\nVersion: {self.VERSION}\n\n{self.CHANGELOG}"
