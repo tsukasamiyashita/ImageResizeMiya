@@ -3,6 +3,22 @@ from tkinter import ttk, filedialog, messagebox, Menu
 from PIL import Image, ImageOps
 import os
 from tkinterdnd2 import DND_FILES, TkinterDnD
+import sys
+
+# ==============================
+# リソースパス取得関数 (exe化対応)
+# ==============================
+def resource_path(relative_path):
+    """実行時（exe）でも通常時（.pyw）でも正しいファイルパスを取得する"""
+    try:
+        # PyInstallerで展開された時の一時フォルダパス
+        base_path = sys._MEIPASS
+    except Exception:
+        # 通常のPythonスクリプトとして実行した時のパス
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, relative_path)
+
 
 class ImageQualityApp:
     # バージョン定数
