@@ -41,7 +41,7 @@ jobs:
         pyinstaller 
         --onefile 
         --noconsole 
-        --name "ImageResizeMiya-v1.2.3" 
+        --name "ImageResizeMiya-v1.2.4" 
         --add-data "readme.md;."
         --hidden-import openpyxl 
         --hidden-import PIL 
@@ -54,5 +54,5 @@ jobs:
     - name: Upload Artifact
       uses: actions/upload-artifact@v4
       with:
-        name: ImageResizeMiya-v1.2.3  # ←★変更：フォルダ名
-        path: dist/ImageResizeMiya-v1.2.3.exe # ←★変更：上で付けた名前 + .exe にします
+        name: ImageResizeMiya-v1.2.4  # ←★変更：フォルダ名
+        path: dist/ImageResizeMiya-v1.2.4.exe # ←★変更：上で付けた名前 + .exe にします
